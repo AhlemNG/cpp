@@ -28,3 +28,31 @@ bool IsValidChoice(std::string choice)
     return(false);
     
 }
+
+void prompt()
+{
+    std::cout <<std::endl << "***********Welcome to your PhoneBook***********" << std::endl;
+    std::cout << "Please enter your choice" << std::endl;
+    std::cout << "To add a new contact, tap: ADD" << std::endl;
+    std::cout << "To display a specific contact, tap: SEARCH" << std::endl;
+    std::cout << "To leave program, tap: EXIT" << std::endl;
+    std::cout << "***********************************************" << std::endl;
+    std::cout << std::endl << "Your choice : ";
+} 
+
+std::string GetChoice()
+{
+    std::string command;
+    while (true) {
+    getline(std::cin,command);
+    if (std::cin.eof()==1) 
+    {
+        std::cin.clear();
+        std::cin.ignore();
+    continue;
+    }
+    else
+        break;
+}
+    return(command);
+}

@@ -15,35 +15,13 @@
 #include "PhoneBook.hpp"
 
 bool IsValidChoice(std::string choice);
-
+void prompt();
+std::string GetChoice();
 /*a valid choice is 
 NOT EOF 
 ONE OF : ADD, SEARCH, EXIT*/
 
-std::string prompt()
-{
-    std::string choice;
-    
-    while (1)
-    {
-        std::cout <<std::endl << "***********Welcome to your PhoneBook***********" << std::endl;
-        std::cout << "Please enter your choice" << std::endl;
-        std::cout << "To add a new contact, tap: ADD" << std::endl;
-        std::cout << "To display a specific contact, tap: SEARCH" << std::endl;
-        std::cout << "To leave program, tap: EXIT" << std::endl;
-        std::cout << "***********************************************" << std::endl;
-        std::cout << std::endl << "Your choice : ";
-    
-        if (!std::getline(std::cin, choice))
-        {
-            std::cout <<"empty**************************************\n";
-            exit(0);
-        }
-        if (!choice.empty())
-         return(choice);
-    }
-    // return (0);
-}
+
 
 
 int main()
@@ -53,17 +31,21 @@ int main()
 
     while(choice.compare("EXIT"))
     {
-        choice.clear();
+        choice  = "RESET" ;
+        prompt();
         
-        choice = prompt();
-        if (IsValidChoice(choice))
-            phonebook.Execute(choice); 
+        if (!choice.compare("RESET"))
+        {
+            // std::cin >> choice;
+            choice  = GetChoice();
+            if (IsValidChoice(choice))
+            {
+                phonebook.Execute(choice); 
+            }
+        }
+
     }
-    if (!choice.compare("EXIT"))
-    {
-        choice.clear();
-        phonebook.Exit();
-    }
+    phonebook.Exit();
     return (0);
 }
 
