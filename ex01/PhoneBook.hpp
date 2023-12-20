@@ -6,7 +6,7 @@
 /*   By: anouri <anouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 10:22:29 by anouri            #+#    #+#             */
-/*   Updated: 2023/12/19 13:10:14 by anouri           ###   ########.fr       */
+/*   Updated: 2023/12/20 16:54:22 by anouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@
 class PhoneBook {
     private:    
         Contact Contacts[8];
+        void AddContact();
+        void searchContact();
     public:
         PhoneBook();
         ~PhoneBook();
-        void AddContact();
-        void searchContact();
+        void Exit();
+        void Execute(std::string choice);
 };
 
 #endif
