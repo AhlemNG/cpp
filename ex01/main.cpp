@@ -6,7 +6,7 @@
 /*   By: anouri <anouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 10:39:23 by anouri            #+#    #+#             */
-/*   Updated: 2023/12/20 17:19:41 by anouri           ###   ########.fr       */
+/*   Updated: 2023/12/21 14:01:23 by anouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,22 @@ int main()
     PhoneBook phonebook;
     std::string choice;
 
-    while(choice.compare("EXIT"))
+    while(1)
     {
-        choice  = "RESET" ;
-        prompt();
-        
-        if (!choice.compare("RESET"))
-        {
-            // std::cin >> choice;
-            choice  = GetChoice();
-            if (IsValidChoice(choice))
-            {
-                phonebook.Execute(choice); 
-            }
-        }
-
+        choice.clear();
+        choice  = GetChoice();
+        if (!choice.empty())
+            phonebook.Execute(choice); 
     }
-    phonebook.Exit();
     return (0);
 }
+
+/*
+1- Ask for a choice
+    if is valid=> return choice
+    else
+        show error message
+        ask again
+*/
+
 

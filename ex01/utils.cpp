@@ -6,17 +6,21 @@
 /*   By: anouri <anouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 16:29:17 by anouri            #+#    #+#             */
-/*   Updated: 2023/12/20 16:38:40 by anouri           ###   ########.fr       */
+/*   Updated: 2023/12/21 14:22:51 by anouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
 #include "PhoneBook.hpp"
 
-bool IsValidIndex(int index)
+bool IsValidIndex(char index)
 {
-    if (index >= 0 && index < 8)
-        return (true);
+    if (isdigit(index))
+    {
+        if (index >= (0 + 48) && index < (8 + 48))
+            return (true);
+    }
+    std::cout << "invalid index" << std::endl;
     return(false);
 }
 
@@ -42,17 +46,20 @@ void prompt()
 
 std::string GetChoice()
 {
-    std::string command;
-    while (true) {
-    getline(std::cin,command);
-    if (std::cin.eof()==1) 
+    std::string choice;
+
+    do
     {
-        std::cin.clear();
-        std::cin.ignore();
-    continue;
+        choice.clear();
+        prompt();
+        if (std::cin.eof() || !(std::cin >> choice))
+        {
+            std::cin.clear();
+            choice = "EXIT";
+
+        }
     }
-    else
-        break;
+    while(!IsValidChoice(choice));
+    return(choice);
 }
-    return(command);
-}
+

@@ -6,7 +6,7 @@
 /*   By: anouri <anouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 14:25:19 by anouri            #+#    #+#             */
-/*   Updated: 2023/12/19 16:13:05 by anouri           ###   ########.fr       */
+/*   Updated: 2023/12/21 14:39:04 by anouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@ void Contact::DisplayPhoneBook(int index) const
     std::string displayedLastName = (_last_name.length() > 10) ? (_last_name.substr(0, 9) + ".") : _last_name;
     std::string displayedNickName = (_nick_name.length() > 10) ? (_nick_name.substr(0, 9) + ".") : _nick_name;
 
-    std::cout << std::setw(4) << index << std::setw(4) 
-    << " | " << std::left << displayedFirstName << std::setw(10 - displayedFirstName.length())
-    << " | " << std::left << displayedLastName << std::setw(10 - displayedLastName.length())
-    << " | " << std::left << displayedNickName << std::endl;
+    std::cout << std::setw(5) << std::left << index << " | " << std::setw(10)
+    << std::left << displayedFirstName << " | " << std::setw(10)
+    << std::left << displayedLastName  << " | " << std::setw(10)
+    << std::left << displayedNickName  << " | " << std::endl;
 }
 
 std::string Contact::GetFirstName()
 {
-    return(_first_name);
+    return(this->_first_name);
 }

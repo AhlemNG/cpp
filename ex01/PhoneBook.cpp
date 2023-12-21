@@ -6,7 +6,7 @@
 /*   By: anouri <anouri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 14:24:23 by anouri            #+#    #+#             */
-/*   Updated: 2023/12/20 16:53:34 by anouri           ###   ########.fr       */
+/*   Updated: 2023/12/21 14:31:17 by anouri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,6 @@
 
 PhoneBook::PhoneBook()
 {
-    // for (int i = 0; i < 8 ; i++)
-    // {
-    //     Contacts[i].first_name = NULL;
-    //     Contacts[i].last_name = NULL;
-    //     Contacts[i].nickname = NULL;
-    //     Contacts[i].darkest_secret = NULL;
-    //     Contacts[i].phone_number = NULL;
-           
-    // }
 }
 
 PhoneBook::~PhoneBook()
@@ -60,14 +51,14 @@ void PhoneBook::AddContact()
         i = 0; 
 }
 
-bool IsValidIndex(int index);
+bool IsValidIndex(char index);
 
 void PhoneBook::searchContact()
 {
     std::cout << std::endl << "Searching..." << std::endl;
     
     int i = 0;
-    std::cout << "index | " << "first name | " << "last name | " << "nick name" << std::endl;
+    std::cout << "index | " << "first name | " << "last name  | " << "nick name  |" << std::endl;
     while(i < 8)
     {
         if(Contacts[i].GetFirstName().length())
@@ -81,25 +72,20 @@ void PhoneBook::searchContact()
             break;
         }
     }
-    /*works only with int if a char =>pbm*/
-    int index;
-    std::cout << "Please enter the index from the list above" << std::endl;
-    std::cout << "Index: ";
-    std::cin >> index;
-    std::cout << std::endl;
-    if (!isdigit(index))
+    int index = atoi(std::string(1, GetIndex()).c_str());
+    if (!Contacts[index].GetFirstName().length())
     {
-        if(IsValidIndex(index) && Contacts[index].GetFirstName().length())
-            Contacts[index].DisplayContact();
+        std::cin.clear();
+        std::cout << "Empty!" << std::endl;
+        return;
     }
-    else
-        std::cout << "invalid index" << std::endl;
+    Contacts[index].DisplayContact();
 }
 
 void PhoneBook::Exit()
 {
       std::cout << std::endl << "Leaving..." << std::endl;
-        exit(0);
+      exit(0);
 }
 
 void PhoneBook::Execute(std::string choice)
@@ -108,6 +94,23 @@ void PhoneBook::Execute(std::string choice)
         AddContact();
     else if (!choice.compare("SEARCH"))
         searchContact();
+    else if (!choice.compare("EXIT"))
+        Exit();
 }
 
 
+char PhoneBook::GetIndex()
+{
+    char index;
+    do
+    {
+        std::cin.clear();
+        std::cin.ignore();
+        std::cout << "Please enter the index from the list above" << std::endl;
+        std::cout << "Index: ";
+        if (!(std::cin >> index) || std::cin.eof())
+            exit(0);
+        std::cout << std::endl;
+    }while(!IsValidIndex(index));
+    return(index);
+}
